@@ -33,7 +33,7 @@ const ListTodos = () => {
 
   const getDream = async id => {
     try {
-      const response = await fetch(`http://${process.env.REACT_APP_DOMAIN}:5001/dream/${id}`);
+      const response = await fetch(`${process.env.REACT_APP_DOMAIN}/dream/${id}`);
       const jsonData = await response.json();
 
       setDreamData(jsonData);

@@ -69,7 +69,7 @@ const InputTodo = () => {
 
       console.log(body);
       
-      await fetch(`http://${process.env.REACT_APP_DOMAIN}:5001/dream`, {
+      await fetch(`${process.env.REACT_APP_DOMAIN}/dream`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
