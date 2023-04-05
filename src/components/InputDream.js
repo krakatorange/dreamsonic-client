@@ -1,55 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
-const InputTodo = () => {
+const InputDream = (props) => {
   const [description, setDescription] = useState(localStorage.getItem('dreamInputData'));
-
-  // const sendDreamInput = e => {
-  //   // get uid
-  //   const conditions = ["user_id", "uuid", "uid", "userid"];
-  //   let uid = ''
-  //   console.log(document.cookie)
-  //   const ary = document.cookie.split(";");
-
-  //   for (let i = 0; i < ary.length; i++) {
-  //     if (conditions.some(el => ary[i].includes(el))) {
-  //       uid = ary[i].split("=")[1]
-  //     }
-  //   }
-
-  //   let data = {
-  //     "user_id": uid,
-  //     "role": "user",
-  //     "gender": "man",
-  //     "content": localStorage.getItem('fieldData')
-  //   }
-
-  //   console.log(data)
-
-  //   // fetch(process.env.REACT_APP_AWS_APIGATEWAY_LAMBDA_CHATGPT_ENDPOINT, {
-  //   //   method: "POST", // or 'PUT'
-  //   //   headers: {
-  //   //     "Content-Type": "application/json",
-  //   //     "x-api-key": process.env.AWS_LAMBDA_CHATGPT_API_KEY
-  //   //   },
-  //   //   body: JSON.stringify(data),
-  //   // })
-  // };
-
-  // // const onSubmitForm = async e => {
-  // //   e.preventDefault();
-  // //   try {
-  // //     const body = { description };
-  // //     const response = await fetch("http://localhost:5001/todos", {
-  // //       method: "POST",
-  // //       headers: { "Content-Type": "application/json" },
-  // //       body: JSON.stringify(body)
-  // //     });
-
-  // //     window.location = "/";
-  // //   } catch (err) {
-  // //     console.error(err.message);
-  // //   }
-  // // };
 
   function handleInput() {
     localStorage.setItem('dreamInputData', document.getElementById("dreamInput").value);
@@ -57,6 +9,7 @@ const InputTodo = () => {
 
   const onSubmitDreamForm = async e => {
     e.preventDefault();
+    props.setIsLoading(true);
     try {
       const gender = document.getElementById("flexRadioDefault1").checked ? "woman" : "man";
       const user_id = localStorage.getItem('user_id');
@@ -66,8 +19,6 @@ const InputTodo = () => {
         "gender": gender,
         "content": description
       };
-
-      console.log(body);
       
       await fetch(`${process.env.REACT_APP_DOMAIN}/dream`, {
         method: "POST",
@@ -78,8 +29,33 @@ const InputTodo = () => {
       window.location = "/";
     } catch (err) {
       console.error(err.message);
+      props.setIsLoading(false);
     }
   };
+
+  const getDream = async id => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_DOMAIN}/dream/${id}`);
+        const jsonData = await response.json();
+  
+        localStorage.setItem('dreamInputData', jsonData["dream"]);
+        setDescription(jsonData["dream"]);
+      } catch (err) {
+        console.error(err.message);
+        if (err.message === 'Network Error') {
+          // This is a network error.
+          console.log('There was a network error.');
+      }
+      }
+  }
+
+  useEffect(() => {
+    if(props.share_id === undefined) {
+      getDream(localStorage.getItem('user_id'));
+    } else {
+      getDream(props.share_id);
+    }
+  },[]);
 
   return (
     <Fragment>
@@ -102,6 +78,7 @@ const InputTodo = () => {
           className="w-100 btn btn-lg btn-primary mb-3"
           id="rastolkovat"
           type="submit"
+          disabled={props.isLoading}
         >
           Interpret
         </button>
@@ -110,4 +87,4 @@ const InputTodo = () => {
   );
 };
 
-export default InputTodo;
+export default InputDream;
