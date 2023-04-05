@@ -35,7 +35,7 @@ const ListDream = (props) => {
       navigator
         .share({
           title: "Dreamsonic AI",
-          text: "See my dream",
+          text: "Read about my dream:\n\n",
           url: `${id}`,
         })
         .then(() => console.log("Successful share"))
