@@ -36,7 +36,7 @@ const ListDream = (props) => {
         .share({
           title: "Dreamsonic AI",
           text: "See my dream",
-          url: `${process.env.REACT_APP_URL}/${id}`,
+          url: `${id}`,
         })
         .then(() => console.log("Successful share"))
         .catch((error) => console.log("Error sharing", error));
