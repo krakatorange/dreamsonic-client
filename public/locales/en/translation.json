@@ -1,0 +1,22 @@
+{
+    "header": {
+        "title": "Dreamsonic",
+        "proposition": "Artificial intelligence for dream interpretation",
+        "woman": "Woman",
+        "man": "Man"
+    },
+    "input": {
+        "placeholder": "Last night, I dreamt about...",
+        "submit": "Interpret"
+    },
+    "share": {
+        "title": "Dreamsonic AI",
+        "text": "Read about my dream:\n\n",
+        "button": "Share"
+    },
+    "footer": {
+        "copywrite": "© 2023 «Dreamsonic»",
+        "contact": "Contact",
+        "email": "hello@dreamsonic.ai"
+    }
+}

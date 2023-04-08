@@ -1,7 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
 const InputDream = (props) => {
   const [description, setDescription] = useState(localStorage.getItem('dreamInputData'));
+  const { t } = useTranslation();
 
   function handleInput() {
     localStorage.setItem('dreamInputData', document.getElementById("dreamInput").value);
@@ -67,9 +69,9 @@ const InputDream = (props) => {
           style={{"resize":"none"}}
           rows="4"
           value={description}
-          placeholder="Last night, I dreamt about..."
+          placeholder={t('input.placeholder')}
           onFocus={(e) => e.target.placeholder = ""} 
-          onBlur={(e) => e.target.placeholder = "Last night, I dreamt about..."}
+          onBlur={(e) => e.target.placeholder = t('input.placeholder') }
           onInput={handleInput}
           onChange={e => setDescription(e.target.value)}
         />
@@ -79,7 +81,7 @@ const InputDream = (props) => {
           type="submit"
           disabled={props.isLoading}
         >
-          Interpret
+          {t('input.submit')}
         </button>
       </form>
     </Fragment>

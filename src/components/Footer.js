@@ -1,13 +1,16 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <>
         {/* Footer Component */}
         <p className="text-small text-white text-center">
-            © 2023 «Dreamsonic»
+            {t('footer.copywrite')}
             <br />
-            Contact &mdash; hello@dreamsonic.ai{" "}
+            {t('footer.contact')} &mdash; {t('footer.email')}{" "}
         </p>
     </>
   );

@@ -1,8 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useTranslation } from 'react-i18next';
 
 const ListDream = (props) => {
   const [dreamdata, setDreamData] = useState([]);
+  const { t } = useTranslation();
   let dreamcard = "";
 
   const getDream = async id => {
@@ -34,8 +36,8 @@ const ListDream = (props) => {
     if (navigator.share) {
       navigator
         .share({
-          title: "Dreamsonic AI",
-          text: "Read about my dream:\n\n",
+          title: t('share.title'),
+          text: t('share.text'),
           url: `${id}`,
         })
         .then(() => console.log("Successful share"))
@@ -75,7 +77,7 @@ const ListDream = (props) => {
             ></path>
           </g>
         </svg>
-        | Share
+        | {t('share.button')}
       </button>
     );
   }

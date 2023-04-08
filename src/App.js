@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -7,12 +7,14 @@ import Home from "./pages/Home";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/:share_id" element={<Home />}/>
-      </Routes>
-    </BrowserRouter>
+    <Suspense fallback="loading">
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/:share_id" element={<Home />}/>
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   );
 }
 
