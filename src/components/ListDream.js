@@ -87,16 +87,16 @@ const ListDream = (props) => {
           <p className="card-text">
             {dreamdata.content}
           </p>
-        </div>
-        {props.share_id === undefined ?
+          {props.share_id === undefined ?
           <CopyToClipboard text={`${process.env.REACT_APP_URL}/${localStorage.getItem('user_id')}`} >
             {shareComponent(localStorage.getItem('user_id'))}
           </CopyToClipboard>
           :
           <CopyToClipboard text={`${process.env.REACT_APP_URL}/${props.share_id}`} >
             {shareComponent(props.share_id)}
-          </CopyToClipboard> 
+          </CopyToClipboard>
         }
+        </div>
       </div>
   }
 
