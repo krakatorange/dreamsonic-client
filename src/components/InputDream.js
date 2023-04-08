@@ -59,7 +59,7 @@ const InputDream = (props) => {
 
   return (
     <Fragment>
-      <form className="mb-3" onSubmit={onSubmitDreamForm}>
+      <form className="mb-0" onSubmit={onSubmitDreamForm}>
         <textarea
           id="dreamInput"
           type="text"
@@ -73,7 +73,6 @@ const InputDream = (props) => {
           onInput={handleInput}
           onChange={e => setDescription(e.target.value)}
         />
-        <br></br>
         <button
           className="w-100 btn btn-lg btn-primary mb-3"
           id="rastolkovat"
