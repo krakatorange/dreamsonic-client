@@ -3,18 +3,19 @@ import { useTranslation } from 'react-i18next';
 
 const InputDream = (props) => {
   const [description, setDescription] = useState(localStorage.getItem('dreamInputData'));
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   function handleInput() {
     localStorage.setItem('dreamInputData', document.getElementById("dreamInput").value);
   }
-
+  
   const onSubmitDreamForm = async e => {
     e.preventDefault();
     props.setIsLoading(true);
     try {
       const gender = document.getElementById("flexRadioDefault1").checked ? "woman" : "man";
       const user_id = localStorage.getItem('user_id');
+      
       const body = {
         "user_id": user_id,
         "role": "user",

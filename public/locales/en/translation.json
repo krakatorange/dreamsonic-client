@@ -1,4 +1,7 @@
 {
+    "home": {
+        "spinner": "Analyzing your dream"
+    },
     "header": {
         "title": "Dreamsonic",
         "proposition": "Artificial intelligence for dream interpretation",
