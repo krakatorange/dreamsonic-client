@@ -5,12 +5,12 @@
     "header": {
         "title": "Dreamsonic",
         "proposition": "Artificial intelligence for dream interpretation",
-        "woman": "Woman",
-        "man": "Man"
+        "woman": "I am a Woman",
+        "man": "I am a Man"
     },
     "input": {
         "placeholder": "Last night, I dreamt about...",
-        "submit": "Interpret"
+        "submit": "Know the meaning"
     },
     "share": {
         "title": "Dreamsonic AI",

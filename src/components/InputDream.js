@@ -76,6 +76,35 @@ const InputDream = (props) => {
           onInput={handleInput}
           onChange={e => setDescription(e.target.value)}
         />
+
+        {/* Radio Buttons Component */}
+        <div className="mb-3 text-white text-center">
+            <div className="form-check form-check-inline">
+            <input
+                className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault1"
+                defaultChecked
+            />
+            <label className="form-check-label" htmlFor="flexRadioDefault1">
+                {t('header.woman')}
+            </label>
+            </div>
+            <div className="form-check form-check-inline mb-2">
+            <input
+                className="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="flexRadioDefault2"
+            />
+            <label className="form-check-label" htmlFor="flexRadioDefault2">
+                {t('header.man')}
+            </label>
+            </div>
+            <br />
+        </div>
+
         <button
           className="w-100 btn btn-lg btn-primary mb-3"
           id="rastolkovat"
