@@ -7,13 +7,32 @@ const ListDream = (props) => {
   const { t } = useTranslation();
   let dreamcard = "";
 
-  const getDream = async id => {
+  const getUserDream = async id => {
     try {
       const response = await fetch(`${process.env.REACT_APP_DOMAIN}/dream/${id}`);
       const jsonData = await response.json();
 
       setDreamData(jsonData);
-      props.setIsLoading(false)   // Hide loading screen 
+      props.setDreamId(jsonData["dream_id"]);
+      props.setIsLoading(false)   // Hide loading screen
+    } catch (err) {
+      console.error(err.message);
+      if (err.message === 'Network Error') {
+        // This is a network error.
+        console.log('There was a network error.');
+      }
+      props.setIsLoading(false);
+    }
+  };
+
+  const getShareDream = async id => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_DOMAIN}/share_dream/${id}`);
+      const jsonData = await response.json();
+
+      setDreamData(jsonData);
+      props.setDreamId(jsonData["dream_id"]);
+      props.setIsLoading(false)   // Hide loading screen
     } catch (err) {
       console.error(err.message);
       if (err.message === 'Network Error') {
@@ -25,12 +44,13 @@ const ListDream = (props) => {
   };
 
   useEffect(() => {
-    if(props.share_id === undefined) {
-      getDream(localStorage.getItem('user_id'));
+    if(props.dream_id === undefined) {
+      getUserDream(localStorage.getItem('user_id'));
     } else {
-      getDream(props.share_id);
+      getShareDream(props.dream_id);
     }
-  },[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[props.dream_id]);
 
   const shareNavigator = (id) => {
     if (navigator.share) {
@@ -89,15 +109,9 @@ const ListDream = (props) => {
           <p className="card-text">
             {dreamdata.content}
           </p>
-          {props.share_id === undefined ?
-          <CopyToClipboard text={`${process.env.REACT_APP_URL}/${localStorage.getItem('user_id')}`} >
-            {shareComponent(localStorage.getItem('user_id'))}
+          <CopyToClipboard text={`${process.env.REACT_APP_URL}/${props.dream_id}`} >
+            {shareComponent(props.dream_id)}
           </CopyToClipboard>
-          :
-          <CopyToClipboard text={`${process.env.REACT_APP_URL}/${props.share_id}`} >
-            {shareComponent(props.share_id)}
-          </CopyToClipboard>
-        }
         </div>
       </div>
   }

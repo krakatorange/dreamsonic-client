@@ -13,6 +13,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 function Home() {
   let { share_id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [dream_id, setDreamId] = useState();
 
   if (localStorage.getItem('user_id')) {
     if (localStorage.getItem('user_id').length > 0) {
@@ -40,8 +41,8 @@ function Home() {
             <div className="col-md-5">
               <Header />
               <Fragment>
-                  <InputDream share_id={share_id} isLoading={isLoading} setIsLoading={setIsLoading}/>
-                  <ListDream share_id={share_id} isLoading={isLoading} setIsLoading={setIsLoading}/>
+                  <InputDream share_id={share_id} isLoading={isLoading} setIsLoading={setIsLoading} dream_id={dream_id} setDreamId={setDreamId}/>
+                  <ListDream share_id={share_id} isLoading={isLoading} setIsLoading={setIsLoading} dream_id={dream_id} setDreamId={setDreamId}/>
               </Fragment>
               <Footer />  
             </div>

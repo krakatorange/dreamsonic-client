@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 const InputDream = (props) => {
   const [description, setDescription] = useState(localStorage.getItem('dreamInputData'));
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   function handleInput() {
     localStorage.setItem('dreamInputData', document.getElementById("dreamInput").value);
@@ -36,13 +36,14 @@ const InputDream = (props) => {
     }
   };
 
-  const getDream = async id => {
+  const getUserDream = async id => {
       try {
         const response = await fetch(`${process.env.REACT_APP_DOMAIN}/dream/${id}`);
         const jsonData = await response.json();
   
         localStorage.setItem('dreamInputData', jsonData["dream"]);
         setDescription(jsonData["dream"]);
+        props.setDreamId(jsonData["dream_id"]);
       } catch (err) {
         console.error(err.message);
         if (err.message === 'Network Error') {
@@ -52,13 +53,31 @@ const InputDream = (props) => {
       }
   }
 
+  const getShareDream = async id => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_DOMAIN}/share_dream/${id}`);
+      const jsonData = await response.json();
+
+      localStorage.setItem('dreamInputData', jsonData["dream"]);
+      setDescription(jsonData["dream"]);
+      props.setDreamId(jsonData["dream_id"]);
+    } catch (err) {
+      console.error(err.message);
+      if (err.message === 'Network Error') {
+        // This is a network error.
+        console.log('There was a network error.');
+    }
+    }
+}
+
   useEffect(() => {
     if(props.share_id === undefined) {
-      getDream(localStorage.getItem('user_id'));
+      getUserDream(localStorage.getItem('user_id'));
     } else {
-      getDream(props.share_id);
+      getShareDream(props.share_id);
     }
-  },[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[props.share_id, props.dream_id]);
 
   return (
     <Fragment>
