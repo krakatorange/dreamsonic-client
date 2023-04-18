@@ -13,13 +13,11 @@ const InputDream = (props) => {
     e.preventDefault();
     props.setIsLoading(true);
     try {
-      const gender = document.getElementById("flexRadioDefault1").checked ? "woman" : "man";
       const user_id = localStorage.getItem('user_id');
       
       const body = {
         "user_id": user_id,
         "role": "user",
-        "gender": gender,
         "content": description
       };
       
@@ -97,7 +95,7 @@ const InputDream = (props) => {
         />
 
         {/* Radio Buttons Component */}
-        <div className="mb-3 text-white text-center">
+        {/* <div className="mb-3 text-white text-center">
             <div className="form-check form-check-inline">
             <input
                 className="form-check-input"
@@ -122,7 +120,7 @@ const InputDream = (props) => {
             </label>
             </div>
             <br />
-        </div>
+        </div> */}
 
         <button
           className="w-100 btn btn-lg btn-primary mb-3"
