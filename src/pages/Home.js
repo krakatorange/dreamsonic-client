@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+// import { YMInitializer } from 'react-yandex-metrika';
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import Canvas from "../canvas";
@@ -50,6 +51,7 @@ function Home() {
         </div>
       </main>
       <Canvas />
+      {/* <YMInitializer accounts={[parseInt(process.env.REACT_APP_YDX_KEY)]} options={{webvisor: true}} /> */}
     </div>
   );
 }

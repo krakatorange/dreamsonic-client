@@ -75,7 +75,7 @@ const InputDream = (props) => {
       getShareDream(props.share_id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[props.share_id, props.dream_id]);
+  },[]);
 
   return (
     <Fragment>

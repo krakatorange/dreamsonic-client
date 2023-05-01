@@ -50,7 +50,7 @@ const ListDream = (props) => {
       getShareDream(props.dream_id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[props.dream_id]);
+  },[]);
 
   const shareNavigator = (id) => {
     if (navigator.share) {
